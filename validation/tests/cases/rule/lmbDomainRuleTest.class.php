@@ -120,25 +120,25 @@ class lmbDomainRuleTest extends lmbValidationRuleTestCase
 
     $this->error_list->expectCallCount('addError', 4);
 
-    $this->error_list->expectArgumentsAt(0,
+    $this->error_list->expectAt(0,
                                         'addError',
                                          array(lmb_i18n('{Field} cannot start with a period.', 'validation'),
                                                array('Field'=>'testfield'),
                                                array()));
 
-    $this->error_list->expectArgumentsAt(1,
+    $this->error_list->expectAt(1,
                                         'addError',
                                          array(lmb_i18n('{Field} cannot end with a period.', 'validation'),
                                                array('Field'=>'testfield'),
                                                array()));
 
-    $this->error_list->expectArgumentsAt(2,
+    $this->error_list->expectAt(2,
                                         'addError',
                                          array(lmb_i18n('{Field} may not contain double periods (..).', 'validation'),
                                                array('Field'=>'testfield'),
                                                array()));
 
-    $this->error_list->expectArgumentsAt(3,
+    $this->error_list->expectAt(3,
                                         'addError',
                                         array(lmb_i18n('{Field} segment {segment} is too large (it must be 63 characters or less).', 'validation'),
                                               array('Field'=>'testfield'),
