@@ -21,7 +21,7 @@ class WactHtmlBBCodeComponentTestCase extends WactTemplateTestCase
     $BBCode = $page->getChild('test');
     $BBCode->setText('[url=javascript:alert(\'Hacker!\')]Click Here[/url]');
     $res = $page->capture();
-    $this->assertNoUnwantedPattern('~javascript~',$res);
+    $this->assertNoPattern('~javascript~',$res);
   }
 }
 

@@ -65,7 +65,7 @@ class WactTagInfoExtractorTest extends UnitTestCase
     }
     catch(WactException $e)
     {
-      $this->assertWantedPattern('/File not found/', $e->getMessage());
+      $this->assertPattern('/File not found/', $e->getMessage());
       $this->assertEqual($e->getParam('file'), $file);
     }
   }
@@ -84,7 +84,7 @@ class WactTagInfoExtractorTest extends UnitTestCase
     }
     catch(WactException $e)
     {
-      $this->assertWantedPattern('/Annotation not found in file/', $e->getMessage());
+      $this->assertPattern('/Annotation not found in file/', $e->getMessage());
       $this->assertEqual($e->getParam('file'), $file);
       $this->assertEqual($e->getParam('annotation'), 'tag');
     }

@@ -70,7 +70,7 @@ class WactGenericHTMLTagTestCase extends WactTemplateTestCase
     }
     catch(WactException $e)
     {
-      $this->assertWantedPattern('/Missing close tag/', $e->getMessage());
+      $this->assertPattern('/Missing close tag/', $e->getMessage());
       $this->assertEqual($e->getParam('tag'), 'DIV');
     }
   }

@@ -199,7 +199,7 @@ class WactHTMLParserTest extends UnitTestCase
     }
     catch(WactException $e)
     {
-      $this->assertWantedPattern('/Invalid tag attribute syntax/', $e->getMessage());
+      $this->assertPattern('/Invalid tag attribute syntax/', $e->getMessage());
       $this->assertEqual($e->getParam('file'), $this->file_name);
       $this->assertEqual($e->getParam('line'), 1);
     }
@@ -214,7 +214,7 @@ class WactHTMLParserTest extends UnitTestCase
     }
     catch(WactException $e)
     {
-      $this->assertWantedPattern('/Invalid tag attribute syntax/', $e->getMessage());
+      $this->assertPattern('/Invalid tag attribute syntax/', $e->getMessage());
       $this->assertEqual($e->getParam('file'), $this->file_name);
       $this->assertEqual($e->getParam('line'), 1);
     }
@@ -229,7 +229,7 @@ class WactHTMLParserTest extends UnitTestCase
     }
     catch(WactException $e)
     {
-      $this->assertWantedPattern('/Invalid tag attribute syntax/', $e->getMessage());
+      $this->assertPattern('/Invalid tag attribute syntax/', $e->getMessage());
       $this->assertEqual($e->getParam('file'), $this->file_name);
       $this->assertEqual($e->getParam('line'), 1);
     }
@@ -244,7 +244,7 @@ class WactHTMLParserTest extends UnitTestCase
     }
     catch(WactException $e)
     {
-      $this->assertWantedPattern('/Invalid tag syntax/', $e->getMessage());
+      $this->assertPattern('/Invalid tag syntax/', $e->getMessage());
       $this->assertEqual($e->getParam('file'), $this->file_name);
       $this->assertEqual($e->getParam('line'), 1);
     }
@@ -259,7 +259,7 @@ class WactHTMLParserTest extends UnitTestCase
     }
     catch(WactException $e)
     {
-      $this->assertWantedPattern('/Invalid tag syntax/', $e->getMessage());
+      $this->assertPattern('/Invalid tag syntax/', $e->getMessage());
       $this->assertEqual($e->getParam('file'), $this->file_name);
       $this->assertEqual($e->getParam('line'), 1);
     }

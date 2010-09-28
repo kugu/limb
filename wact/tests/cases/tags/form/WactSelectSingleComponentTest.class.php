@@ -25,8 +25,8 @@ class WactSelectSingleComponentTest extends WactTemplateTestCase
     $Select->setChoices($choices);
 
     $output = $page->capture();
-    $this->assertWantedPattern('~<form[^>]+id="testForm"[^>]*>.*</form>$~ims', $output);
-    $this->assertWantedPattern('~<select[^>]+id="test"[^>]*>(\s*<option\svalue="\d+"[^>]*>[^<]*</option>)+.*</select>~ims', $output);
+    $this->assertPattern('~<form[^>]+id="testForm"[^>]*>.*</form>$~ims', $output);
+    $this->assertPattern('~<select[^>]+id="test"[^>]*>(\s*<option\svalue="\d+"[^>]*>[^<]*</option>)+.*</select>~ims', $output);
     $this->assertNoPattern('~<option\s+value="0"(?U)[^>]*selected[^>]*>[^<]*</option>~ims', $output);
   }
 
@@ -44,8 +44,8 @@ class WactSelectSingleComponentTest extends WactTemplateTestCase
     $Select->setChoices($choices);
 
     $output = $page->capture();
-    $this->assertWantedPattern('~<form[^>]+id="testForm"[^>]*>.*</form>$~ims', $output);
-    $this->assertWantedPattern('~<select[^>]+id="test"[^>]*>(\s*<option\svalue="[a-c]"[^>]*>[^<]*</option>)+.*</select>~ims', $output);
+    $this->assertPattern('~<form[^>]+id="testForm"[^>]*>.*</form>$~ims', $output);
+    $this->assertPattern('~<select[^>]+id="test"[^>]*>(\s*<option\svalue="[a-c]"[^>]*>[^<]*</option>)+.*</select>~ims', $output);
   }
 
   function testSetSelectionWithIndex()
@@ -64,9 +64,9 @@ class WactSelectSingleComponentTest extends WactTemplateTestCase
     $Select->setSelection($selectedKey);
 
     $output = $page->capture();
-    $this->assertWantedPattern('~<form[^>]+id="testForm"[^>]*>.*</form>$~ims', $output);
-    $this->assertWantedPattern('~<select[^>]+id="test"[^>]*>(\s*<option\svalue="\d+"[^>]*>[^<]*</option>)+.*</select>~ims', $output);
-    $this->assertWantedPattern('~<option[^>]+value="1"[^>]+selected[^>]*>green</option>~ims', $output);
+    $this->assertPattern('~<form[^>]+id="testForm"[^>]*>.*</form>$~ims', $output);
+    $this->assertPattern('~<select[^>]+id="test"[^>]*>(\s*<option\svalue="\d+"[^>]*>[^<]*</option>)+.*</select>~ims', $output);
+    $this->assertPattern('~<option[^>]+value="1"[^>]+selected[^>]*>green</option>~ims', $output);
   }
 
   function testSetSelectionWithIndexByForm()
@@ -90,9 +90,9 @@ class WactSelectSingleComponentTest extends WactTemplateTestCase
     $Form->registerDataSource($data);
 
     $output = $page->capture();
-    $this->assertWantedPattern('~<form[^>]+id="testForm"[^>]*>.*</form>$~ims', $output);
-    $this->assertWantedPattern('~<select[^>]+id="test"[^>]*>(\s*<option\svalue="\d+"[^>]*>[^<]*</option>)+.*</select>~ims', $output);
-    $this->assertWantedPattern('~<option[^>]+value="1"[^>]+selected[^>]*>green</option>~ims', $output);
+    $this->assertPattern('~<form[^>]+id="testForm"[^>]*>.*</form>$~ims', $output);
+    $this->assertPattern('~<select[^>]+id="test"[^>]*>(\s*<option\svalue="\d+"[^>]*>[^<]*</option>)+.*</select>~ims', $output);
+    $this->assertPattern('~<option[^>]+value="1"[^>]+selected[^>]*>green</option>~ims', $output);
   }
 
   function testSetSelectionWithGivenValue()
@@ -109,8 +109,8 @@ class WactSelectSingleComponentTest extends WactTemplateTestCase
     $Select->setChoices($choices);
 
     $output = $page->capture();
-    $this->assertWantedPattern('~<select[^>]+id="mySelect"[^>]*>(\s*<option\svalue="\d+"[^>]*>[^<]*</option>)+.*</select>~ims', $output);
-    $this->assertWantedPattern('~<option[^>]+value="1"[^>]+selected[^>]*>green</option>~ims', $output);
+    $this->assertPattern('~<select[^>]+id="mySelect"[^>]*>(\s*<option\svalue="\d+"[^>]*>[^<]*</option>)+.*</select>~ims', $output);
+    $this->assertPattern('~<option[^>]+value="1"[^>]+selected[^>]*>green</option>~ims', $output);
   }
 
   function testSetSelectionWithHash()
@@ -129,9 +129,9 @@ class WactSelectSingleComponentTest extends WactTemplateTestCase
     $Select->setSelection('b');
 
     $output = $page->capture();
-    $this->assertWantedPattern('~<form[^>]+id="testForm"[^>]*>.*</form>$~ims', $output);
-    $this->assertWantedPattern('~<select[^>]+id="test"[^>]*>(\s*<option\svalue="[a-c]"[^>]*>[^<]*</option>)+.*</select>~ims', $output);
-    $this->assertWantedPattern('~<option[^>]+value="b"[^>]+selected[^>]*>green</option>~ims', $output);
+    $this->assertPattern('~<form[^>]+id="testForm"[^>]*>.*</form>$~ims', $output);
+    $this->assertPattern('~<select[^>]+id="test"[^>]*>(\s*<option\svalue="[a-c]"[^>]*>[^<]*</option>)+.*</select>~ims', $output);
+    $this->assertPattern('~<option[^>]+value="b"[^>]+selected[^>]*>green</option>~ims', $output);
   }
 
   function testSetSelectionWithFormValueAsObject()
@@ -150,9 +150,9 @@ class WactSelectSingleComponentTest extends WactTemplateTestCase
     $Select->setSelection($object);
 
     $output = $page->capture();
-    $this->assertWantedPattern('~<form[^>]+id="testForm"[^>]*>.*</form>$~ims', $output);
-    $this->assertWantedPattern('~<select[^>]+id="test"[^>]*>(\s*<option\svalue="[1-3]"[^>]*>[^<]*</option>)+.*</select>~ims', $output);
-    $this->assertWantedPattern('~<option[^>]+value="2"[^>]+selected[^>]*>green</option>~ims', $output);
+    $this->assertPattern('~<form[^>]+id="testForm"[^>]*>.*</form>$~ims', $output);
+    $this->assertPattern('~<select[^>]+id="test"[^>]*>(\s*<option\svalue="[1-3]"[^>]*>[^<]*</option>)+.*</select>~ims', $output);
+    $this->assertPattern('~<option[^>]+value="2"[^>]+selected[^>]*>green</option>~ims', $output);
   }
 
   function testSetSelectionWithFormValueAsObjectWithSelectField()
@@ -171,9 +171,9 @@ class WactSelectSingleComponentTest extends WactTemplateTestCase
     $Select->setSelection($object);
 
     $output = $page->capture();
-    $this->assertWantedPattern('~<form[^>]+id="testForm"[^>]*>.*</form>$~ims', $output);
-    $this->assertWantedPattern('~<select[^>]+id="test"[^>]*>(\s*<option\svalue="[1-3]"[^>]*>[^<]*</option>)+.*</select>~ims', $output);
-    $this->assertWantedPattern('~<option[^>]+value="2"[^>]+selected[^>]*>green</option>~ims', $output);
+    $this->assertPattern('~<form[^>]+id="testForm"[^>]*>.*</form>$~ims', $output);
+    $this->assertPattern('~<select[^>]+id="test"[^>]*>(\s*<option\svalue="[1-3]"[^>]*>[^<]*</option>)+.*</select>~ims', $output);
+    $this->assertPattern('~<option[^>]+value="2"[^>]+selected[^>]*>green</option>~ims', $output);
   }
 
   function testMixedOptionsWithZeroKey()
@@ -192,8 +192,8 @@ class WactSelectSingleComponentTest extends WactTemplateTestCase
     $Select->setSelection($object);
 
     $output = $page->capture();
-    $this->assertWantedPattern('~<form[^>]+id="testForm"[^>]*>.*</form>$~ims', $output);
-    $this->assertWantedPattern('~<option[^>]+value="green"[^>]+selected[^>]*>G</option>~ims', $output);
+    $this->assertPattern('~<form[^>]+id="testForm"[^>]*>.*</form>$~ims', $output);
+    $this->assertPattern('~<option[^>]+value="green"[^>]+selected[^>]*>G</option>~ims', $output);
     $this->assertNoPattern('~<option[^>]+value="0"[^>]+selected[^>]*>--</option>~ims', $output);
   }
 

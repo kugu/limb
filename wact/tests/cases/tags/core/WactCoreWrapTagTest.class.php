@@ -113,7 +113,7 @@ class WactCoreWrapTagTest extends WactTemplateTestCase
     }
     catch(WactException $e)
     {
-      $this->assertWantedPattern('/Missing required attribute/', $e->getMessage());
+      $this->assertPattern('/Missing required attribute/', $e->getMessage());
     }
   }
 
@@ -134,7 +134,7 @@ class WactCoreWrapTagTest extends WactTemplateTestCase
     }
     catch(WactException $e)
     {
-      $this->assertWantedPattern('/Missing required attribute/', $e->getMessage());
+      $this->assertPattern('/Missing required attribute/', $e->getMessage());
     }
   }
 }

@@ -88,7 +88,7 @@ class WactCodeWriterTest extends UnitTestCase
   function testGetTempVariable()
   {
     $var = $this->writer->getTempVariable();
-    $this->assertWantedPattern('/[a-z][a-z0-9]*/i', $var);
+    $this->assertPattern('/[a-z][a-z0-9]*/i', $var);
   }
 
   function testGetSecondTempVariable()
@@ -103,7 +103,7 @@ class WactCodeWriterTest extends UnitTestCase
     for ($i = 1; $i <= 30; $i++)
     {
       $var = $this->writer->getTempVariable();
-      $this->assertWantedPattern('/[a-z][a-z0-9]*/i', $var);
+      $this->assertPattern('/[a-z][a-z0-9]*/i', $var);
     }
   }
 }

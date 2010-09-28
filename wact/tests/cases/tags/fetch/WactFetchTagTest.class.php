@@ -114,7 +114,7 @@ class WactFetchTagTest extends WactTemplateTestCase
     }
     catch(WactException $e)
     {
-      $this->assertWantedPattern('/Path based variable name is not supported in buffer attribute/', $e->getMessage());
+      $this->assertPattern('/Path based variable name is not supported in buffer attribute/', $e->getMessage());
       $this->assertEqual($e->getParam('expression'), 'path.to.var');
     }
   }
@@ -145,7 +145,7 @@ class WactFetchTagTest extends WactTemplateTestCase
     }
     catch(WactException $e)
     {
-      $this->assertWantedPattern('/None existing expression datasource context/', $e->getMessage());
+      $this->assertPattern('/None existing expression datasource context/', $e->getMessage());
       $this->assertEqual($e->getParam('expression'), '[data]var1');
     }
   }
@@ -176,7 +176,7 @@ class WactFetchTagTest extends WactTemplateTestCase
     }
     catch(WactException $e)
     {
-      $this->assertWantedPattern('/None existing expression datasource context/', $e->getMessage());
+      $this->assertPattern('/None existing expression datasource context/', $e->getMessage());
     }
   }
 
@@ -323,7 +323,7 @@ class WactFetchTagTest extends WactTemplateTestCase
     }
     catch(WactException $e)
     {
-      $this->assertWantedPattern('/Sorting is not implemented/', $e->getMessage()); // see TestingFetchTagsDataset class at the top
+      $this->assertPattern('/Sorting is not implemented/', $e->getMessage()); // see TestingFetchTagsDataset class at the top
       $this->assertEqual($e->getParam('sort_params'), array('title' => 'ASC'));
     }
   }
@@ -343,7 +343,7 @@ class WactFetchTagTest extends WactTemplateTestCase
     }
     catch(WactException $e)
     {
-      $this->assertWantedPattern('/Sorting is not implemented/', $e->getMessage()); // see TestingFetchTagsDataset class at the top
+      $this->assertPattern('/Sorting is not implemented/', $e->getMessage()); // see TestingFetchTagsDataset class at the top
       $this->assertEqual($e->getParam('sort_params'), array('title' => 'ASC'));
     }
   }

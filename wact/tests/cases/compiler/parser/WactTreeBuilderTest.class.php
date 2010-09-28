@@ -120,7 +120,7 @@ class WactTreeBuilderTest extends UnitTestCase
     }
     catch(WactException $e)
     {
-      $this->assertWantedPattern('/Lonely closing tag/', $e->getMessage());
+      $this->assertPattern('/Lonely closing tag/', $e->getMessage());
       $params = $e->getParams();
       $this->assertEqual($params['file'], 'my_file');
       $this->assertEqual($params['line'], 10);
@@ -200,7 +200,7 @@ class WactTreeBuilderTest extends UnitTestCase
     }
     catch(WactException $e)
     {
-      $this->assertWantedPattern('/Unexpected closing tag/', $e->getMessage());
+      $this->assertPattern('/Unexpected closing tag/', $e->getMessage());
       $params = $e->getParams();
       $this->assertEqual($params['file'], 'my_file');
       $this->assertEqual($params['tag'], 'our_tag');
