@@ -445,7 +445,7 @@ class OutsideMarginExpectation extends WithinMarginExpectation {
  *    @package SimpleTest
  *    @subpackage UnitTester
  */
-class ReferenceExpectation {
+class ReferenceExpectation extends SimpleExpectation {
     private $value;
 
     /**

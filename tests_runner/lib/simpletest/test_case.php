@@ -40,6 +40,7 @@ class SimpleTestCase {
     protected $reporter;
     private $observers;
     private $should_skip = false;
+    private $tests_filters = array();
 
     /**
      *    Sets up the test with no display.
@@ -60,6 +61,16 @@ class SimpleTestCase {
      */
     function getLabel() {
         return $this->label ? $this->label : get_class($this);
+    }
+
+    /**
+     * Sets up a filters for tests by tests names (string matching)
+     * @param $filters array of string
+     * @access public
+     */
+    function setTestsFilters(array $filters)
+    {
+      $this->tests_filters = $filters;
     }
 
     /**
@@ -163,7 +174,7 @@ class SimpleTestCase {
     function getTests() {
         $methods = array();
         foreach (get_class_methods(get_class($this)) as $method) {
-            if ($this->isTest($method)) {
+            if ($this->isTest($method) && $this->isTestMatchFilters($method)) {
                 $methods[] = $method;
             }
         }
@@ -183,6 +194,20 @@ class SimpleTestCase {
             return ! SimpleTestCompatibility::isA($this, strtolower($method));
         }
         return false;
+    }
+
+    protected function isTestMatchFilters($test_name) {
+      if ( !$this->tests_filters)
+        return true;
+      else {
+      	foreach ($this->tests_filters as $filter)
+      	{
+      		if (false !== strpos($test_name, $filter)) {
+      			return true;
+      		}
+      	}
+      	return false;
+      }
     }
 
     /**

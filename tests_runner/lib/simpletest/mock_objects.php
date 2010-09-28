@@ -434,7 +434,6 @@ class SimpleCallSchedule {
         $message .= Mock::getExpectationLine();
         $this->expected_args[strtolower($method)] =
                 new ParametersExpectation($args, $message);
-
     }
 
     /**

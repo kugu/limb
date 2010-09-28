@@ -1,0 +1,94 @@
+diff -crB ./original//expectation.php ./our//expectation.php
+*** ./original//expectation.php	2010-09-25 14:58:11.000000000 +0400
+--- ./our//expectation.php	2010-09-28 07:23:43.000000000 +0400
+***************
+*** 445,451 ****
+   *    @package SimpleTest
+   *    @subpackage UnitTester
+   */
+! class ReferenceExpectation {
+      private $value;
+  
+      /**
+--- 445,451 ----
+   *    @package SimpleTest
+   *    @subpackage UnitTester
+   */
+! class ReferenceExpectation extends SimpleExpectation {
+      private $value;
+  
+      /**
+Only in ./our/: .skipif.php
+Only in ./original//test/site: temp
+diff -crB ./original//test_case.php ./our//test_case.php
+*** ./original//test_case.php	2010-09-25 14:58:11.000000000 +0400
+--- ./our//test_case.php	2010-09-28 06:59:26.000000000 +0400
+***************
+*** 40,45 ****
+--- 40,46 ----
+      protected $reporter;
+      private $observers;
+      private $should_skip = false;
++     private $tests_filters = array();
+  
+      /**
+       *    Sets up the test with no display.
+***************
+*** 63,68 ****
+--- 64,79 ----
+      }
+  
+      /**
++      * Sets up a filters for tests by tests names (string matching)
++      * @param $filters array of string
++      * @access public
++      */
++     function setTestsFilters(array $filters)
++     {
++       $this->tests_filters = $filters;
++     }
++ 
++     /**
+       *    This is a placeholder for skipping tests. In this
+       *    method you place skipIf() and skipUnless() calls to
+       *    set the skipping state.
+***************
+*** 163,169 ****
+      function getTests() {
+          $methods = array();
+          foreach (get_class_methods(get_class($this)) as $method) {
+!             if ($this->isTest($method)) {
+                  $methods[] = $method;
+              }
+          }
+--- 174,180 ----
+      function getTests() {
+          $methods = array();
+          foreach (get_class_methods(get_class($this)) as $method) {
+!             if ($this->isTest($method) && $this->isTestMatchFilters($method)) {
+                  $methods[] = $method;
+              }
+          }
+***************
+*** 185,190 ****
+--- 196,215 ----
+          return false;
+      }
+  
++     protected function isTestMatchFilters($test_name) {
++       if ( !$this->tests_filters)
++         return true;
++       else {
++       	foreach ($this->tests_filters as $filter)
++       	{
++       		if (false !== strpos($test_name, $filter)) {
++       			return true;
++       		}
++       	}
++       	return false;
++       }
++     }
++ 
+      /**
+       *    Announces the start of the test.
+       *    @param string $method    Test method just started.
