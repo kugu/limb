@@ -42,7 +42,7 @@ class lmbActiveRecordValidationStub extends lmbActiveRecord
 class lmbARValidationTest extends lmbARBaseTestCase
 {
   protected $tables_to_cleanup = array('test_one_table_object');
-  
+
   function testGetErrorListReturnDefaultErrorList()
   {
     $object = $this->_createActiveRecord();
@@ -199,7 +199,7 @@ class lmbARValidationTest extends lmbARBaseTestCase
     $error_list = new MockErrorList();
     $error_list->setReturnValueAt(0, 'isValid', false);
     $error_list->setReturnValueAt(1, 'isValid', true);
-    
+
     try
     {
       $object->save($error_list);
@@ -211,12 +211,12 @@ class lmbARValidationTest extends lmbARBaseTestCase
     }
 
     $this->assertEqual($this->db->count('test_one_table_object'), 0);
-    
+
     $object->save($error_list);
 
     $this->assertEqual($this->db->count('test_one_table_object'), 1);
   }
-  
+
   function testDontUpdateOnValidationError()
   {
     $object = $this->_createActiveRecordWithDataAndSave();
@@ -267,7 +267,7 @@ class lmbARValidationTest extends lmbARBaseTestCase
     $record = $this->db->selectRecord('test_one_table_object');
     $this->assertEqual($record->get('annotation'), $annotation);
   }
-  
+
   function testDoubleUpdate_FirstSaveValidationError_But_SecondSaveIsOk()
   {
     $object = $this->_createActiveRecordWithDataAndSave();
@@ -280,7 +280,7 @@ class lmbARValidationTest extends lmbARBaseTestCase
     $error_list = new MockErrorList();
     $error_list->setReturnValueAt(0, 'isValid', false);
     $error_list->setReturnValueAt(1, 'isValid', true);
-    
+
     try
     {
       $object->save($error_list);
@@ -293,12 +293,12 @@ class lmbARValidationTest extends lmbARBaseTestCase
 
     $record = $this->db->selectRecord('test_one_table_object');
     $this->assertNotEqual($record->get('annotation'), $annotation);
-    
+
     $object->save($error_list);
 
     $record = $this->db->selectRecord('test_one_table_object');
     $this->assertEqual($record->get('annotation'), $annotation);
-  }  
+  }
 
   function testSaveSkipValidation()
   {
