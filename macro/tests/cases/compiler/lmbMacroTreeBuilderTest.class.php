@@ -94,7 +94,7 @@ class lmbMacroTreeBuilderTest extends UnitTestCase
     }
     catch(lmbMacroException $e)
     {
-      $this->assertWantedPattern('/Lonely closing tag/', $e->getMessage());
+      $this->assertPattern('/Lonely closing tag/', $e->getMessage());
       $params = $e->getParams();
       $this->assertEqual($params['file'], 'my_file');
       $this->assertEqual($params['line'], 10);
@@ -134,7 +134,7 @@ class lmbMacroTreeBuilderTest extends UnitTestCase
     }
     catch(lmbMacroException $e)
     {
-      $this->assertWantedPattern('/Unexpected closing tag/', $e->getMessage());
+      $this->assertPattern('/Unexpected closing tag/', $e->getMessage());
       $params = $e->getParams();
       $this->assertEqual($params['file'], 'my_file');
       $this->assertEqual($params['line'], 12);
