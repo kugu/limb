@@ -88,11 +88,8 @@ class lmbTestTreeFileNode extends lmbTestTreeTerminalNode
         continue;
 
       $case = new $class();
-      $case->filter(lmbTestOptions :: get('methods_filter'));
-      $test->addTestCase($case);
-      //a dirty SimpleTest PHP4 compatibility hack
-      //otherwise $case is overwrittne since it is a reference
-      unset($case);
+      $case->setTestsFilters(lmbTestOptions :: get('methods_filter'));
+      $test->add($case);
     }
   }
 }

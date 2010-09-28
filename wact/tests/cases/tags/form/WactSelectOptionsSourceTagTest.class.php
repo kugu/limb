@@ -24,7 +24,7 @@ class WactSelectOptionsSourceTagTest extends WactTemplateTestCase
     }
     catch(WactException $e)
     {
-      $this->assertWantedPattern('/Could not find component/', $e->getMessage());
+      $this->assertPattern('/Could not find component/', $e->getMessage());
     }
   }
 
@@ -44,7 +44,7 @@ class WactSelectOptionsSourceTagTest extends WactTemplateTestCase
     }
     catch(WactException $e)
     {
-      $this->assertWantedPattern('/Select tag not found/', $e->getMessage());
+      $this->assertPattern('/Select tag not found/', $e->getMessage());
     }
   }
 

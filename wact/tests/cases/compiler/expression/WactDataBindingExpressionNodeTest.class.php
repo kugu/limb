@@ -130,7 +130,7 @@ class WactDataBindingExpressionNodeTest extends UnitTestCase
     }
     catch(WactException $e)
     {
-      $this->assertWantedPattern('/Expression datasource context not found/', $e->getMessage());
+      $this->assertPattern('/Expression datasource context not found/', $e->getMessage());
       $this->assertEqual($e->getParam('file'), 'my_file');
       $this->assertEqual($e->getParam('line'), 10);
     }
@@ -150,7 +150,7 @@ class WactDataBindingExpressionNodeTest extends UnitTestCase
     }
     catch(WactException $e)
     {
-      $this->assertWantedPattern('/Invalid data binding/', $e->getMessage());
+      $this->assertPattern('/Invalid data binding/', $e->getMessage());
       $this->assertEqual($e->getParam('expression'), $expression);
       $this->assertEqual($e->getParam('file'), 'my_file');
       $this->assertEqual($e->getParam('line'), 10);
@@ -172,7 +172,7 @@ class WactDataBindingExpressionNodeTest extends UnitTestCase
     }
     catch(WactException $e)
     {
-      $this->assertWantedPattern('/Cannot resolve data binding/', $e->getMessage());
+      $this->assertPattern('/Cannot resolve data binding/', $e->getMessage());
       $this->assertEqual($e->getParam('expression'), $expression);
       $this->assertEqual($e->getParam('file'), 'my_file');
       $this->assertEqual($e->getParam('line'), 10);

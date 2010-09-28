@@ -129,7 +129,7 @@ class WactTemplateClipFilterTestCase extends WactTemplateTestCase
     }
     catch (WactException $e)
     {
-      $this->assertWantedPattern('/Invalid tag attribute syntax/', $e->getMessage());
+      $this->assertPattern('/Invalid tag attribute syntax/', $e->getMessage());
     }
   }
 
@@ -145,7 +145,7 @@ class WactTemplateClipFilterTestCase extends WactTemplateTestCase
     }
     catch (WactException $e)
     {
-      $this->assertWantedPattern('/Invalid tag attribute syntax/', $e->getMessage());
+      $this->assertPattern('/Invalid tag attribute syntax/', $e->getMessage());
     }
   }
 
@@ -185,7 +185,7 @@ class WactTemplateClipFilterTestCase extends WactTemplateTestCase
     }
     catch(WactException $e)
     {
-      $this->assertWantedPattern('/Invalid tag attribute syntax/', $e->getMessage());
+      $this->assertPattern('/Invalid tag attribute syntax/', $e->getMessage());
     }
   }
 

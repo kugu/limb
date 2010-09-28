@@ -347,7 +347,6 @@ class WactFormTagTest extends WactTemplateTestCase
 
     $page = $this->initTemplate('/tags/form/form/getserveridwithid.html');
     $page->getChild('test');
-    $this->assertNoErrors();
   }
 
   function testGetServerIdWithName()
@@ -357,7 +356,6 @@ class WactFormTagTest extends WactTemplateTestCase
 
     $page = $this->initTemplate('/tags/form/form/getserveridwithname.html');
     $page->getChild('foo');
-    $this->assertNoErrors();
   }
 
   function testIsDataSource()

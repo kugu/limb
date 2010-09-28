@@ -49,7 +49,7 @@ class WactInputTagTest extends WactTemplateTestCase
     }
     catch(WactException $e)
     {
-      $this->assertWantedPattern('/Unrecognized type attribute for input tag/', $e->getMessage());
+      $this->assertPattern('/Unrecognized type attribute for input tag/', $e->getMessage());
     }
   }
 

@@ -214,7 +214,7 @@ class WactBadHtmlTest extends WactTemplateTestCase
     }
     catch(WactException $e)
     {
-      $this->assertWantedPattern('/Lonely closing tag/', $e->getMessage());
+      $this->assertPattern('/Lonely closing tag/', $e->getMessage());
       $this->assertEqual($e->getParam('tag'), 'body/');
     }
   }
@@ -231,7 +231,7 @@ class WactBadHtmlTest extends WactTemplateTestCase
     }
     catch(WactException $e)
     {
-      $this->assertWantedPattern('/Lonely closing tag/', $e->getMessage());
+      $this->assertPattern('/Lonely closing tag/', $e->getMessage());
       $this->assertEqual($e->getParam('tag'), 'body attribute="test"');
     }
   }
@@ -268,7 +268,7 @@ class WactBadHtmlTest extends WactTemplateTestCase
     }
     catch(WactException $e)
     {
-      $this->assertWantedPattern('/Missing close tag/', $e->getMessage());
+      $this->assertPattern('/Missing close tag/', $e->getMessage());
     }
   }
 
@@ -284,7 +284,7 @@ class WactBadHtmlTest extends WactTemplateTestCase
     }
     catch(WactException $e)
     {
-      $this->assertWantedPattern('/Missing close tag/', $e->getMessage());
+      $this->assertPattern('/Missing close tag/', $e->getMessage());
     }
   }
 
@@ -433,7 +433,7 @@ class WactBadHtmlTest extends WactTemplateTestCase
     }
     catch(WactException $e)
     {
-      $this->assertWantedPattern('/Missing close tag/', $e->getMessage());
+      $this->assertPattern('/Missing close tag/', $e->getMessage());
     }
   }
 
@@ -472,7 +472,7 @@ class WactBadHtmlTest extends WactTemplateTestCase
     }
     catch(WactException $e)
     {
-      $this->assertWantedPattern('/Missing close tag/', $e->getMessage());
+      $this->assertPattern('/Missing close tag/', $e->getMessage());
     }
   }
 }

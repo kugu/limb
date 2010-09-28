@@ -142,7 +142,7 @@ class WactExpressionTest extends UnitTestCase
     }
     catch(WactException $e)
     {
-      $this->assertWantedPattern('/Unknown filter/', $e->getMessage());
+      $this->assertPattern('/Unknown filter/', $e->getMessage());
       $this->assertEqual($e->getParam('filter'), 'no_such_filter');
     }
   }
@@ -156,7 +156,7 @@ class WactExpressionTest extends UnitTestCase
     }
     catch(WactException $e)
     {
-      $this->assertWantedPattern('/Filter name expected/', $e->getMessage());
+      $this->assertPattern('/Filter name expected/', $e->getMessage());
     }
   }
 

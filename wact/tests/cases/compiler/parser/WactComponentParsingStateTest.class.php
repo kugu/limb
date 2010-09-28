@@ -142,7 +142,7 @@ class WactComponentParsingStateTest extends WactBaseParsingStateTestCase
     }
     catch(WactException $e)
     {
-      $this->assertWantedPattern('/Illegal use of variable reference/', $e->getMessage());
+      $this->assertPattern('/Illegal use of variable reference/', $e->getMessage());
       $this->assertEqual($e->getParam('expression'), '{$hello}');
       $this->assertEqual($e->getParam('file'), 'my_file');
       $this->assertEqual($e->getParam('line'), 10);
@@ -297,7 +297,7 @@ class WactComponentParsingStateTest extends WactBaseParsingStateTestCase
     }
     catch(WactException $e)
     {
-      $this->assertWantedPattern('/Closing tag is forbidden for this tag\. Use self closing notation/', $e->getMessage());
+      $this->assertPattern('/Closing tag is forbidden for this tag\. Use self closing notation/', $e->getMessage());
       $this->assertEqual($e->getParam('tag'), 'test');
       $this->assertEqual($e->getParam('file'), 'my_file');
       $this->assertEqual($e->getParam('line'), 10);
@@ -324,7 +324,7 @@ class WactComponentParsingStateTest extends WactBaseParsingStateTestCase
     }
     catch(WactException $e)
     {
-      $this->assertWantedPattern('/Closing tag forbidden/', $e->getMessage());
+      $this->assertPattern('/Closing tag forbidden/', $e->getMessage());
       $this->assertEqual($e->getParam('tag'), $tag);
       $this->assertEqual($e->getParam('file'), 'my_file');
       $this->assertEqual($e->getParam('line'), 10);

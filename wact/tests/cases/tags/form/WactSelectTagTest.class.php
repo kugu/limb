@@ -59,7 +59,7 @@ class WactSelectTagTest extends WactTemplateTestCase
     }
     catch(WactException $e)
     {
-      $this->assertWantedPattern('/"\[\]" required/', $e->getMessage());
+      $this->assertPattern('/"\[\]" required/', $e->getMessage());
     }
   }
 }

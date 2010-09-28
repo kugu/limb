@@ -39,7 +39,7 @@ class WactCoreIncludeTagTest extends WactTemplateTestCase
     }
     catch(WactException $e)
     {
-        $this->assertWantedPattern('/Template source file not found/', $e->getMessage());
+        $this->assertPattern('/Template source file not found/', $e->getMessage());
     }
   }
 
@@ -55,7 +55,7 @@ class WactCoreIncludeTagTest extends WactTemplateTestCase
     }
     catch(WactException $e)
     {
-      $this->assertWantedPattern('/Missing required attribute/', $e->getMessage());
+      $this->assertPattern('/Missing required attribute/', $e->getMessage());
     }
   }
 
@@ -121,7 +121,7 @@ class WactCoreIncludeTagTest extends WactTemplateTestCase
     }
     catch(WactException $e)
     {
-      $this->assertWantedPattern('/Missing close tag/', $e->getMessage());
+      $this->assertPattern('/Missing close tag/', $e->getMessage());
       $this->assertEqual($e->getParam('file'), '/tags/core/include/included_template.html');
       $this->assertEqual($e->getParam('line'), 1);
     }

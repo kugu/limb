@@ -17,7 +17,7 @@ class WactDevSourceTagTest extends WactTemplateTestCase
     $this->registerTestingTemplate('/tags/dev/source.tag', $template);
 
     $page = $this->initTemplate('/tags/dev/source.tag');
-    $this->assertWantedPattern('~WactTemplate::getValue\(\$root-&gt;datasource,\'var\'\)~', $page->capture());
+    $this->assertPattern('~WactTemplate::getValue\(\$root-&gt;datasource,\'var\'\)~', $page->capture());
   }
 }
 

@@ -160,7 +160,7 @@ class WactListTagsTest extends WactTemplateTestCase
     }
     catch(WactException $e)
     {
-      $this->assertWantedPattern('/Unexpected closing tag/', $e->getMessage());
+      $this->assertPattern('/Unexpected closing tag/', $e->getMessage());
       $this->assertEqual($e->getParam('tag'), 'list:ITEM');
     }
   }
@@ -453,9 +453,9 @@ class WactListTagsTest extends WactTemplateTestCase
     $page->set('data', $test_ds);
 
     $output = $page->capture();
-    $this->assertWantedPattern('/alert.*1.*alert.*2.*alert.*3/iU', $output, 'Bug 1000806-Failed to iterated over the list [%s]');
-    $this->assertNoUnwantedPattern('/list/i', $output, 'Bug 1000806-Output contains the word list [%s]');
-    $this->assertNoUnwantedPattern('/item/i', $output, 'Bug 1000806-Output contains the word item [%s]');
+    $this->assertPattern('/alert.*1.*alert.*2.*alert.*3/iU', $output, 'Bug 1000806-Failed to iterated over the list [%s]');
+    $this->assertNoPattern('/list/i', $output, 'Bug 1000806-Output contains the word list [%s]');
+    $this->assertNoPattern('/item/i', $output, 'Bug 1000806-Output contains the word item [%s]');
   }
 
   function testScriptInListWorkAround()
@@ -476,9 +476,9 @@ class WactListTagsTest extends WactTemplateTestCase
     $page->set('endscript',  '</script>');
 
     $output = $page->capture();
-    $this->assertWantedPattern('/alert.*1.*alert.*2.*alert.*3/iU', $output, 'Bug 1000806-Failed to iterated over the list [%s]');
-    $this->assertNoUnwantedPattern('/list/i', $output, 'Bug 1000806-Output contains the word list [%s]');
-    $this->assertNoUnwantedPattern('/item/i', $output, 'Bug 1000806-Output contains the word item [%s]');
+    $this->assertPattern('/alert.*1.*alert.*2.*alert.*3/iU', $output, 'Bug 1000806-Failed to iterated over the list [%s]');
+    $this->assertNoPattern('/list/i', $output, 'Bug 1000806-Output contains the word list [%s]');
+    $this->assertNoPattern('/item/i', $output, 'Bug 1000806-Output contains the word item [%s]');
   }
 
   function testListFillTagWithRatio()

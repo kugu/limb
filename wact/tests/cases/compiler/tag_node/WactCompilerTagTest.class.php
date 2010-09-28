@@ -92,7 +92,7 @@ class WactCompilerTagTest extends WactCompileTreeNodeTest
     }
     catch(WactException $e)
     {
-      $this->assertWantedPattern('/Duplicate attribute/', $e->getMessage());
+      $this->assertPattern('/Duplicate attribute/', $e->getMessage());
       $this->assertEqual($e->getParam('attribute'), 'same');
     }
   }
@@ -175,7 +175,7 @@ class WactCompilerTagTest extends WactCompileTreeNodeTest
     }
     catch(WactException $e)
     {
-      $this->assertWantedPattern('/Missing required attribute/', $e->getMessage());
+      $this->assertPattern('/Missing required attribute/', $e->getMessage());
       $this->assertEqual($e->getParam('attribute'), 'bar');
     }
   }
@@ -191,7 +191,7 @@ class WactCompilerTagTest extends WactCompileTreeNodeTest
     }
     catch(WactException $e)
     {
-      $this->assertWantedPattern('/Missing required attribute/', $e->getMessage());
+      $this->assertPattern('/Missing required attribute/', $e->getMessage());
       $this->assertEqual($e->getParam('attribute'), 'bar');
     }
   }
@@ -213,7 +213,7 @@ class WactCompilerTagTest extends WactCompileTreeNodeTest
     }
     catch(WactException $e)
     {
-      $this->assertWantedPattern('/Tag cannot be nested within the same tag/', $e->getMessage());
+      $this->assertPattern('/Tag cannot be nested within the same tag/', $e->getMessage());
       $this->assertEqual($e->getParam('same_tag_file'), 'my_file');
       $this->assertEqual($e->getParam('same_tag_line'), 10);
     }
@@ -243,7 +243,7 @@ class WactCompilerTagTest extends WactCompileTreeNodeTest
     }
     catch(WactException $e)
     {
-      $this->assertWantedPattern('/Tag must be enclosed by a proper parent tag/', $e->getMessage());
+      $this->assertPattern('/Tag must be enclosed by a proper parent tag/', $e->getMessage());
       $this->assertEqual($e->getParam('required_parent_tag_class'), 'MyTagClass1CompilerTest');
       $this->assertEqual($e->getParam('file'), $this->source_location->getFile());
       $this->assertEqual($e->getParam('line'), $this->source_location->getLine());

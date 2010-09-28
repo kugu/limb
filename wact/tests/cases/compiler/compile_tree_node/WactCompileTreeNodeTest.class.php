@@ -222,7 +222,7 @@ class WactCompileTreeNodeTest extends UnitTestCase
     }
     catch(WactException $e)
     {
-      $this->assertWantedPattern('/Duplicate "id" attribute/', $e->getMessage());
+      $this->assertPattern('/Duplicate "id" attribute/', $e->getMessage());
       $params = $e->getParams();
       $this->assertEqual($params['file'], 'my_file2');
       $this->assertEqual($params['line'], 15);

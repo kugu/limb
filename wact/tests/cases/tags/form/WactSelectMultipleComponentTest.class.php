@@ -161,10 +161,10 @@ class WactSelectMultipleComponentTest extends WactTemplateTestCase
     $select->setSelection(array($object1, $object2));
 
     $output = $page->capture();
-    $this->assertWantedPattern('~<form[^>]+id="testForm"[^>]*>.*</form>$~ims', $output);
-    $this->assertWantedPattern('~<select[^>]+id="test"[^>]*>(\s*<option\svalue="[1-3]"[^>]*>[^<]*</option>)+.*</select>~ims', $output);
-    $this->assertWantedPattern('~<option[^>]+value="2"[^>]+selected[^>]*>green</option>~ims', $output);
-    $this->assertWantedPattern('~<option[^>]+value="3"[^>]+selected[^>]*>blue</option>~ims', $output);
+    $this->assertPattern('~<form[^>]+id="testForm"[^>]*>.*</form>$~ims', $output);
+    $this->assertPattern('~<select[^>]+id="test"[^>]*>(\s*<option\svalue="[1-3]"[^>]*>[^<]*</option>)+.*</select>~ims', $output);
+    $this->assertPattern('~<option[^>]+value="2"[^>]+selected[^>]*>green</option>~ims', $output);
+    $this->assertPattern('~<option[^>]+value="3"[^>]+selected[^>]*>blue</option>~ims', $output);
   }
 
   function testSetSelectionWithFormValueAsObjectWithSelectField()
@@ -184,10 +184,10 @@ class WactSelectMultipleComponentTest extends WactTemplateTestCase
     $select->setSelection(array($object1, $object2));
 
     $output = $page->capture();
-    $this->assertWantedPattern('~<form[^>]+id="testForm"[^>]*>.*</form>$~ims', $output);
-    $this->assertWantedPattern('~<select[^>]+id="test"[^>]*>(\s*<option\svalue="[1-3]"[^>]*>[^<]*</option>)+.*</select>~ims', $output);
-    $this->assertWantedPattern('~<option[^>]+value="2"[^>]+selected[^>]*>green</option>~ims', $output);
-    $this->assertWantedPattern('~<option[^>]+value="3"[^>]+selected[^>]*>blue</option>~ims', $output);
+    $this->assertPattern('~<form[^>]+id="testForm"[^>]*>.*</form>$~ims', $output);
+    $this->assertPattern('~<select[^>]+id="test"[^>]*>(\s*<option\svalue="[1-3]"[^>]*>[^<]*</option>)+.*</select>~ims', $output);
+    $this->assertPattern('~<option[^>]+value="2"[^>]+selected[^>]*>green</option>~ims', $output);
+    $this->assertPattern('~<option[^>]+value="3"[^>]+selected[^>]*>blue</option>~ims', $output);
   }
 
   function testSelectUseOptionsListWithDefaultSelectedOption()

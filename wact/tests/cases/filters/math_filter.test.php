@@ -104,8 +104,8 @@ class WactTemplateMathFilterTestCase extends WactTemplateTestCase {
     }
     catch(WactException $e)
     {
-      $this->assertWantedPattern('/Interal Error/i', $e->getMessage());
-      $this->assertWantedPattern('/Undefined operator(?U).*bad/i', $e->getMessage());
+      $this->assertPattern('/Interal Error/i', $e->getMessage());
+      $this->assertPattern('/Undefined operator(?U).*bad/i', $e->getMessage());
     }
   }
 
@@ -124,7 +124,7 @@ class WactTemplateMathFilterTestCase extends WactTemplateTestCase {
       )));
 
     $output = $page->capture();
-    $this->assertWantedPattern('/98[.]95$/', $output);
+    $this->assertPattern('/98[.]95$/', $output);
   }
 }
 

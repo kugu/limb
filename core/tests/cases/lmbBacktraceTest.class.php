@@ -24,7 +24,7 @@ class lmbBacktraceTest extends UnitTestCase
     $backtrace = new lmbBacktrace($trace = debug_backtrace());
     $given = $backtrace->get();
     $this->assertEqual('array', gettype($given));
-    $this->assertIdentical($trace, $given);
+    $this->assertSame($trace, $given);
   }
 
   function testConstruct_Limit()

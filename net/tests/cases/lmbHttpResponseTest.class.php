@@ -123,8 +123,8 @@ class lmbHttpResponseTest extends UnitTestCase
     $this->response->addHeader("Location:to-some-place2");
 
     $this->response->expectCallCount('_sendHeader', 2);
-    $this->response->expectArgumentsAt(0, '_sendHeader', array("Location:to-some-place"));
-    $this->response->expectArgumentsAt(1, '_sendHeader', array("Location:to-some-place2"));
+    $this->response->expectAt(0, '_sendHeader', array("Location:to-some-place"));
+    $this->response->expectAt(1, '_sendHeader', array("Location:to-some-place2"));
 
     $this->response->commit();
   }
@@ -149,14 +149,14 @@ class lmbHttpResponseTest extends UnitTestCase
     $this->response->setCookie($name2 = 'bar', $value2 = '2', $expire2 = 20, $path2 = '/path', $domain2 = 'net.org', $secure2 = false);
 
     $this->response->expectCallCount('_sendCookie', 2);
-    $this->response->expectArgumentsAt(0, '_sendCookie', array(array('name' => $name1,
+    $this->response->expectAt(0, '_sendCookie', array(array('name' => $name1,
                                                                      'value' => $value1,
                                                                      'expire' => $expire1,
                                                                      'path' => $path1,
                                                                      'domain' => $domain1,
                                                                      'secure' => $secure1
                                                                      )));
-    $this->response->expectArgumentsAt(1, '_sendCookie', array(array('name' => $name2,
+    $this->response->expectAt(1, '_sendCookie', array(array('name' => $name2,
                                                                      'value' => $value2,
                                                                      'expire' => $expire2,
                                                                      'path' => $path2,
