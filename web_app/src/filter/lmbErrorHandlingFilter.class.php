@@ -44,7 +44,7 @@ class lmbErrorHandlingFilter implements lmbInterceptingFilter
 
   function handleFatalError($error)
   {
-    $this->toolkit->getLog()->log($error['message'], LOG_ERR);
+    $this->toolkit->log($error['message'], LOG_ERR);
     $this->toolkit->getResponse()->reset();
 
     header('HTTP/1.x 500 Server Error');
@@ -64,7 +64,7 @@ class lmbErrorHandlingFilter implements lmbInterceptingFilter
 
     try
     {
-      $this->toolkit->getLog()->logException($e);
+      $this->toolkit->logException($e);
     }
     catch (Exception $e)
     {
@@ -117,14 +117,14 @@ class lmbErrorHandlingFilter implements lmbInterceptingFilter
 		$error = htmlspecialchars($e->getOriginalMessage());
 		foreach($e->getParams() as $name => $value)
             $params .= $name . '  =>  ' . print_r($value, true) . PHP_EOL;
-        
+
 		$params = htmlspecialchars($params);
 	}
-	else 
+	else
 	{
 		$error = htmlspecialchars($e->getMessage());
 	}
-	  
+
     if($e instanceof lmbException)
       $trace = htmlspecialchars($e->getNiceTraceAsString());
     else
@@ -227,13 +227,7 @@ EOD;
 
   protected function _extractExceptionFileAndLine($e)
   {
-    if($e instanceof WactException)
-    {
-      $params = $e->getParams();
-      if(isset($params['file']))
-        return array($params['file'], $params['line']);
-    }
-    elseif($e instanceof lmbException)
+    if($e instanceof lmbException)
     {
       return array($e->getRealFile(), $e->getRealLine());
     }

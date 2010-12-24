@@ -12,33 +12,6 @@ require_once(dirname(__FILE__) . '/lmbActiveRecordTest.class.php');//need TestOn
 Mock :: generate('lmbValidator', 'MockValidator');
 Mock :: generate('lmbErrorList', 'MockErrorList');
 
-class lmbActiveRecordValidationStub extends lmbActiveRecord
-{
-  protected $_db_table_name = 'test_one_table_object';
-  protected $_insert_validator;
-  protected $_update_validator;
-
-  function setInsertValidator($validator)
-  {
-    $this->_insert_validator = $validator;
-  }
-
-  function setUpdateValidator($validator)
-  {
-    $this->_update_validator = $validator;
-  }
-
-  protected function _createInsertValidator()
-  {
-    return is_object($this->_insert_validator) ? $this->_insert_validator : new lmbValidator();
-  }
-
-  protected function _createUpdateValidator()
-  {
-    return is_object($this->_update_validator) ? $this->_update_validator : new lmbValidator();
-  }
-}
-
 class lmbARValidationTest extends lmbARBaseTestCase
 {
   protected $tables_to_cleanup = array('test_one_table_object');
@@ -379,3 +352,29 @@ class lmbARValidationTest extends lmbARBaseTestCase
   }
 }
 
+class lmbActiveRecordValidationStub extends lmbActiveRecord
+{
+  protected $_db_table_name = 'test_one_table_object';
+  protected $_insert_validator;
+  protected $_update_validator;
+
+  function setInsertValidator($validator)
+  {
+    $this->_insert_validator = $validator;
+  }
+
+  function setUpdateValidator($validator)
+  {
+    $this->_update_validator = $validator;
+  }
+
+  protected function _createInsertValidator()
+  {
+    return is_object($this->_insert_validator) ? $this->_insert_validator : new lmbValidator();
+  }
+
+  protected function _createUpdateValidator()
+  {
+    return is_object($this->_update_validator) ? $this->_update_validator : new lmbValidator();
+  }
+}
