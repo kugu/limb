@@ -40,7 +40,7 @@ limb.project_dir = /www/new-limb-app
 ===== Список тасков =====
 {{section>:limb3:ru:packages:taskman#задачи_пакета_taskman}}
 
-===== Пакет CONSTRUCTOR =====
+==== Пакет CONSTRUCTOR ====
 
 {{section>:limb3:ru:packages:constructor#задачи_создания_проекта_пакета_constructor}}
 

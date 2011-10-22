@@ -2,18 +2,17 @@
 /*
  * Limb PHP Framework
  *
- * @link http://limb-project.com 
- * @copyright  Copyright &copy; 2004-2009 BIT(http://bit-creative.com)
- * @license    LGPL http://www.gnu.org/copyleft/lesser.html 
+ * @link http://limb-project.com
+ * @copyright  Copyright &copy; 2004-2012 BIT(http://bit-creative.com)
+ * @license    LGPL http://www.gnu.org/copyleft/lesser.html
  */
 
 /**
- * class lmbI18NDictionary.
+ * class lmbI18nDictionary.
  *
  * @package i18n
- * @version $Id$
  */
-class lmbI18NDictionary
+class lmbI18nDictionary
 {
   protected $translations;
 
@@ -69,7 +68,7 @@ class lmbI18NDictionary
 
   function merge($d)
   {
-    $dictionary = new lmbI18NDictionary($this->getTranslations());
+    $dictionary = new lmbI18nDictionary($this->getTranslations());
 
     $translations = $d->getTranslations();
     foreach($translations as $text => $translation)

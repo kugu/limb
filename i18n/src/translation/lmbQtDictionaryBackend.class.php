@@ -10,8 +10,6 @@ lmb_require('limb/i18n/src/translation/lmbI18NDictionary.class.php');
 lmb_require('limb/fs/src/exception/lmbFileNotFoundException.class.php');
 lmb_require('limb/fs/src/lmbFs.class.php');
 
-lmb_env_setor('LIMB_TRANSLATIONS_INCLUDE_PATH', 'i18n/translations;limb/*/i18n/translations');
-
 /**
  * class lmbQtDictionaryBackend.
  *
@@ -20,12 +18,13 @@ lmb_env_setor('LIMB_TRANSLATIONS_INCLUDE_PATH', 'i18n/translations;limb/*/i18n/t
  */
 class lmbQtDictionaryBackend //extends lmbDictionaryBackend ???
 {
+  protected $search_path = array();
   protected $use_cache = false;
   protected $cache_dir;
 
-  function __construct()
+  function __construct($search_path = null)
   {
-    $this->search_path = lmb_env_get('LIMB_TRANSLATIONS_INCLUDE_PATH');
+    $this->setSearchPath($search_path);
   }
 
   function setCacheDir($dir)
@@ -40,7 +39,13 @@ class lmbQtDictionaryBackend //extends lmbDictionaryBackend ???
 
   function setSearchPath($path)
   {
-    $this->search_path = $path;
+    $this->search_path = explode(';', $path);
+  }
+
+  function create($locale, $domain)
+  {
+    $file = $this->search_path[0].'/'.$this->_mapToFileName($locale, $domain);
+    return $this->saveToFile($file, new lmbI18nDictionary());
   }
 
   function load($locale, $domain)
@@ -78,7 +83,13 @@ class lmbQtDictionaryBackend //extends lmbDictionaryBackend ???
 
   function mapToFile($locale, $domain)
   {
-    return lmbToolkit :: instance()->findFileByAlias($domain . '.' . $locale . '.ts', $this->search_path, 'i18n_translations');
+    return lmbToolkit :: instance()
+      ->findFileByAlias($this->_mapToFileName($locale, $domain), $this->search_path, 'i18n_translations');
+  }
+
+  protected function _mapToFileName($locale, $domain = 'default')
+  {
+    return $domain . '.' . $locale . '.ts';
   }
 
   function getDOMDocument($dictionary)
@@ -127,7 +138,7 @@ class lmbQtDictionaryBackend //extends lmbDictionaryBackend ???
     if(!file_exists($file))
       throw new lmbFileNotFoundException($file, "translations file $file not found");
 
-    $dictionary = new lmbI18NDictionary();
+    $dictionary = new lmbI18nDictionary();
 
     if(!$this->_loadFromCache($dictionary, $file))
     {
@@ -146,10 +157,9 @@ class lmbQtDictionaryBackend //extends lmbDictionaryBackend ???
 
   protected function _parseXML($dictionary, $xml)
   {
-    if(!$xml_doc = simplexml_load_string($xml))
-    {
-      throw new lmbException('SimpleXML parsing error');
-    }
+    $xml_doc = simplexml_load_string($xml);
+    if(false === $xml_doc)
+      throw new lmbI18nException('SimpleXML parsing error', array('xml' => $xml));
 
     foreach($xml_doc->context as $context)
     {
@@ -166,7 +176,7 @@ class lmbQtDictionaryBackend //extends lmbDictionaryBackend ???
 
   function saveToFile($file, $dictionary)
   {
-    $this->getDOMDocument($dictionary)->save($file);
+    $this->getDOMDocument($dictionary)->save($file, LIBXML_NOEMPTYTAG);
   }
 
   protected function _isFileCachingOn()

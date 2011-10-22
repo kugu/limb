@@ -13,15 +13,23 @@
  */
 require_once('limb/core/common.inc.php');
 lmb_require('limb/i18n/toolkit.inc.php');
+lmb_require('limb/i18n/src/exception/lmbI18nException.class.php');
 
-function lmb_i18n($text, $arg1 = null, $arg2 = null)
+/**
+ * Translate text
+ *
+ * @see lmbI18nTools::translate
+ * @example lmb_i18n(“Hello”, “domain”)
+ * @example lmb_i18n(“Hello {arg}”, array('arg' => 'Bob'), “domain”)
+ */
+function lmb_i18n($text, $args_or_domain = null, $domain = 'default')
 {
   static $toolkit;
 
   if(!$toolkit)
     $toolkit = lmbToolkit :: instance();
 
-  return $toolkit->translate($text, $arg1, $arg2);
+  return $toolkit->translate($text, $args_or_domain, $domain);
 }
 
 function lmb_translit_russian($input, $encoding = 'utf-8')

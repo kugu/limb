@@ -8,9 +8,11 @@
  */
 lmb_require('limb/toolkit/src/lmbAbstractTools.class.php');
 lmb_require('limb/i18n/src/locale/lmbLocale.class.php');
+lmb_require('limb/i18n/src/translation/lmbI18nDictionary.class.php');
 lmb_require('limb/i18n/src/translation/lmbQtDictionaryBackend.class.php');
 
 lmb_env_setor('LIMB_LOCALE_INCLUDE_PATH', 'i18n/locale;limb/i18n/i18n/locale');
+lmb_env_setor('LIMB_TRANSLATIONS_INCLUDE_PATH', 'i18n/translations;limb/*/i18n/translations');
 
 /**
  * class lmbI18NTools.
@@ -18,7 +20,7 @@ lmb_env_setor('LIMB_LOCALE_INCLUDE_PATH', 'i18n/locale;limb/i18n/i18n/locale');
  * @package i18n
  * @version $Id: lmbI18NTools.class.php 8150 2010-03-26 07:58:18Z Forumsky $
  */
-class lmbI18NTools extends lmbAbstractTools
+class lmbI18nTools extends lmbAbstractTools
 {
   protected $current_locale;
   protected $locale_objects = array();
@@ -29,12 +31,8 @@ class lmbI18NTools extends lmbAbstractTools
   {
     if(!is_object($this->dict_backend))
     {
-      $this->dict_backend = new lmbQtDictionaryBackend();
-      if(lmb_env_get('LIMB_VAR_DIR'))
-      {
-        $this->dict_backend->setCacheDir(lmb_env_get('LIMB_VAR_DIR'));
-        $this->dict_backend->useCache();
-      }
+      $paths = lmb_env_get('LIMB_TRANSLATIONS_INCLUDE_PATH');
+      $this->dict_backend = lmbToolkit::instance()->createDictionaryBackend($paths);
     }
 
     return $this->dict_backend;
@@ -43,6 +41,17 @@ class lmbI18NTools extends lmbAbstractTools
   function setDictionaryBackend($backend)
   {
     $this->dict_backend = $backend;
+  }
+
+  function createDictionaryBackend($search_parh)
+  {
+    $dict_backend = new lmbQtDictionaryBackend($search_parh);
+    if(lmb_env_get('LIMB_VAR_DIR') && LIMB_APP_PRODUCTION == lmb_app_mode())
+    {
+      $dict_backend->setCacheDir(lmb_env_get('LIMB_VAR_DIR'));
+      $dict_backend->useCache();
+    }
+    return $dict_backend;
   }
 
   function getLocale()
@@ -103,21 +112,22 @@ class lmbI18NTools extends lmbAbstractTools
     $this->dictionaries[$locale . '@' . $domain] = $dict;
   }
 
-  function translate($text, $arg1 = null, $arg2 = null)
+  /**
+   * Translate text
+   *
+   * @example $toolkit->translate(“Hello”, “domain”)
+   * @example $toolkit->translate(“Hello {arg}”, array('arg' => 'Bob'), “domain”)
+   */
+  function translate($text, $args_or_domain, $domain)
   {
     $locale = $this->toolkit->getLocale();
 
-    $domain = 'default';
     $attributes = null;
 
-    if(is_array($arg1))
-    {
-      $attributes = $arg1;
-      if(is_string($arg2))
-        $domain = $arg2;
-    }
-    elseif(is_string($arg1))
-      $domain = $arg1;
+    if(is_array($args_or_domain))
+      $attributes = $args_or_domain;
+    elseif(is_string($args_or_domain))
+      $domain = $args_or_domain;
 
     if($dict = $this->toolkit->getDictionary($locale, $domain))
       return $dict->translate($text, $attributes);

@@ -2,17 +2,17 @@
 /*
  * Limb PHP Framework
  *
- * @link http://limb-project.com 
+ * @link http://limb-project.com
  * @copyright  Copyright &copy; 2004-2009 BIT(http://bit-creative.com)
- * @license    LGPL http://www.gnu.org/copyleft/lesser.html 
+ * @license    LGPL http://www.gnu.org/copyleft/lesser.html
  */
-lmb_require('limb/i18n/src/translation/lmbI18NDictionary.class.php');
+lmb_require('limb/i18n/src/translation/lmbI18nDictionary.class.php');
 
-class lmbI18NDictionaryTest extends UnitTestCase
+class lmbI18nDictionaryTest extends UnitTestCase
 {
   function testIsEmpty()
   {
-    $d = new lmbI18NDictionary();
+    $d = new lmbI18nDictionary();
     $this->assertTrue($d->isEmpty());
     $d->add('Hello', 'Привет');
     $this->assertFalse($d->isEmpty());
@@ -20,14 +20,14 @@ class lmbI18NDictionaryTest extends UnitTestCase
 
   function testTranslateFailed()
   {
-    $d = new lmbI18NDictionary();
+    $d = new lmbI18nDictionary();
     $this->assertFalse($d->has('Hello'));
     $this->assertEqual($d->translate('Hello'), 'Hello');
   }
 
   function testTranslateOk()
   {
-    $d = new lmbI18NDictionary();
+    $d = new lmbI18nDictionary();
     $d->add('Hello', 'Привет');
     $this->assertTrue($d->has('Hello'));
     $this->assertEqual($d->translate('Hello'), 'Привет');
@@ -35,24 +35,24 @@ class lmbI18NDictionaryTest extends UnitTestCase
 
   function testTranslateWithAttributes()
   {
-    $d = new lmbI18NDictionary();
+    $d = new lmbI18nDictionary();
     $d->add('Hello {what}', 'Привет {what}');
     $this->assertEqual($d->translate('Hello {what}', array('{what}' => 'Bob')), 'Привет Bob');
   }
 
   function testSetTranslations()
   {
-    $d = new lmbI18NDictionary();
+    $d = new lmbI18nDictionary();
     $d->setTranslations(array('Hello' => 'Привет'));
     $this->assertEqual($d->translate('Hello'), 'Привет');
   }
 
   function testMergeAppend()
   {
-    $d1 = new lmbI18NDictionary();
+    $d1 = new lmbI18nDictionary();
     $d1->add('Hello', 'Привет');
 
-    $d2 = new lmbI18NDictionary();
+    $d2 = new lmbI18nDictionary();
     $d2->add('Test', 'Тест');
 
     $d3 = $d1->merge($d2);
@@ -63,10 +63,10 @@ class lmbI18NDictionaryTest extends UnitTestCase
 
   function testMergeReplace()
   {
-    $d1 = new lmbI18NDictionary();
+    $d1 = new lmbI18nDictionary();
     $d1->add('Hello', 'Привет');
 
-    $d2 = new lmbI18NDictionary();
+    $d2 = new lmbI18nDictionary();
     $d2->add('Hello', 'Привет снова');
 
     $d3 = $d1->merge($d2);
@@ -76,7 +76,7 @@ class lmbI18NDictionaryTest extends UnitTestCase
 
   function testIsTranslated()
   {
-    $d = new lmbI18NDictionary();
+    $d = new lmbI18nDictionary();
     $d->add('Hello', 'Привет');
     $d->add('Test');
 
@@ -88,11 +88,11 @@ class lmbI18NDictionaryTest extends UnitTestCase
 
   function testHasSameEntries()
   {
-    $d1 = new lmbI18NDictionary();
+    $d1 = new lmbI18nDictionary();
     $d1->add('Hello', 'Привет');
     $d1->add('Test');
 
-    $d2 = new lmbI18NDictionary();
+    $d2 = new lmbI18nDictionary();
     $d2->add('Test');
     $d2->add('Hello');
 
@@ -102,11 +102,11 @@ class lmbI18NDictionaryTest extends UnitTestCase
 
   function testHasNotSameEntries()
   {
-    $d1 = new lmbI18NDictionary();
+    $d1 = new lmbI18nDictionary();
     $d1->add('Foo', 'Foo');
     $d1->add('Test');
 
-    $d2 = new lmbI18NDictionary();
+    $d2 = new lmbI18nDictionary();
     $d2->add('Test');
     $d2->add('Bar');
 
