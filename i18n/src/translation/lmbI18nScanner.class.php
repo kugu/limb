@@ -65,10 +65,10 @@ class lmbI18nScanner
 
   protected function _searchFunctionCalls($content)
   {
-    $pattern = '#lmb_i18n\s*\(\s*[\'|"]([^\'"]+)[\'|"][^)\'"]*([\'|"]([^\'"]+)[\'|"])?#is';
+    $pattern = '#lmb_i18n\s*\(\s*([\'|"])(.*?[^\\])\1.*?(([\'|"])(.*?)\4)?\)#is';
     preg_match_all($pattern, $content, $matches);
-    $texts = $matches[1];
-    $domains = $matches[3];
+    $texts = $matches[2];
+    $domains = $matches[5];
     for($match_num = 0; $match_num < count($texts); $match_num++)
     {
       $domain = $domains[$match_num] ? $domains[$match_num] : 'default';
