@@ -23,7 +23,6 @@ class lmbI18nScanner
 
   function scan($dir)
   {
-    $this->found_files = array();
     $this->scanForFiles($dir);
     foreach($this->found_files as $file)
       $this->searchMessages($file);

@@ -38,7 +38,7 @@ function task_i18n_init($args = array())
  * @param locale Locale name
  * @param domain Domain name ('default' by default)
  * @param scan Directory to scan
- * @example limb.php i18n_init -D locale=ru_RU -D scan=dir/to/scan [-D domain=default]
+ * @example limb.php i18n_scan -D locale=ru_RU -D scan=dir/to/scan [-D domain=default]
  */
 function task_i18n_scan($args = array())
 {
@@ -47,7 +47,7 @@ function task_i18n_scan($args = array())
   $scan_dir = taskman_propor('scan', null);
   if(!$locale || !$scan_dir)
   {
-    taskman_sysmsg("Usage: limb.php i18n_init -D locale=ru_RU -D scan=dir/to/scan [-D domain=default]");
+    taskman_sysmsg("Usage: limb.php i18n_scan -D locale=ru_RU -D scan=dir/to/scan [-D domain=default]");
     exit(1);
   }
 
@@ -69,7 +69,15 @@ function task_i18n_scan($args = array())
   }
 
   $scanner = new lmbI18nScanner();
-  $scanner->scan($scan_dir);
+
+  if (strnatcasecmp($scan_dir, "all") == 0)
+  {
+    $scanner->scan(realpath(taskman_prop('PROJECT_DIR').'/src'));
+    $scanner->scan(realpath(taskman_prop('PROJECT_DIR').'/i18n/template'));
+  }
+  else
+    $scanner->scan($scan_dir);
+
   $new_dictionary = $scanner->getDictionary($domain);
 
   $backend->save($locale, $domain, $new_dictionary->merge($old_dictionary));
