@@ -1,6 +1,7 @@
 <?php
 lmb_require('limb/filter_chain/src/lmbInterceptingFilter.interface.php');
 lmb_require('limb/dbal/src/drivers/lmbAuditDbConnection.class.php');
+lmb_require('limb/cache2/src/drivers/lmbCacheLoggedConnection.class.php');
 
 set_include_path(dirname(__FILE__) . '/../../lib/PEAR' . PATH_SEPARATOR . get_include_path());
 
@@ -21,20 +22,20 @@ class lmbProfileReportingFilter implements lmbInterceptingFilter
       $this->start_time = microtime(true);
 
       $cache = $toolkit->getCache();
-      $cache = new lmbLoggedCache($cache, 'default');
-      $toolkit->setCache($cache);
+      $cache = new lmbCacheLoggedConnection($cache, 'default');
+      $toolkit->setCache('default', $cache);
     }
 
     $filter_chain->next();
 
     if($is_profile_enabled)
     {
-    	$reporter = lmbToolkit::instance()->getProfileReporter();
+     $reporter = lmbToolkit::instance()->getProfileReporter();
 
-    	$reporter->setScriptStatistic(
-    	  microtime(true) - $this->start_time,
-    	  memory_get_usage(),
-    	  memory_get_peak_usage()
+     $reporter->setScriptStatistic(
+       microtime(true) - $this->start_time,
+       memory_get_usage(),
+       memory_get_peak_usage()
       );
 
       foreach ($conn->getStats() as $key => $info)
@@ -43,7 +44,7 @@ class lmbProfileReportingFilter implements lmbInterceptingFilter
       foreach ($cache->getRuntimeStats() as $key => $info)
         $reporter->addCacheQuery($info);
 
-      echo $reporter->getReport();
+     lmbToolkit::instance()->getResponse()->append($reporter->getReport());
     }
   }
 }

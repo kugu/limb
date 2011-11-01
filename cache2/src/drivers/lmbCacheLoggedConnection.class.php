@@ -9,6 +9,8 @@
 lmb_require('limb/cache2/src/lmbNonTransparentCache.interface.php');
 lmb_require('limb/cache2/src/logs/lmbCacheLogFile.class.php');
 lmb_require('limb/cache2/src/logs/lmbCacheLogMemory.class.php');
+lmb_require('limb/cache2/src/lmbCache.interface.php');
+lmb_require('limb/cache2/src/drivers/lmbCacheAbstractConnection.class.php');
 lmb_require('limb/core/src/lmbBacktrace.class.php');
 
 class lmbCacheLoggedConnection extends lmbCacheAbstractConnection
@@ -95,17 +97,19 @@ class lmbCacheLoggedConnection extends lmbCacheAbstractConnection
       lmbCache::OPERATION_DELETE => 'DELETE',
     );
 
-    foreach ($this->messages as $message)
-    {
-      $queries[] = array(
-        'command' => $operation_names[$message['operation']],
-        'key' => $message['key'],
-        'query' => $operation_names[$message['operation']].' - '.$message['key'],
-        'trace' => $message['trace'],
-        'time'  => $message['time'],
-        'result' => ($message['result'])  ? 'SUCCESS' : 'ERROR'
-      );
-    }
+    $records = $this->getLogRecords();
+    if(!is_null($records))
+      foreach ($stats = $this->getStats() as $message)
+      {
+        $queries[] = array(
+          'command' => $operation_names[$message['operation']],
+          'key' => $message['key'],
+          'query' => $operation_names[$message['operation']].' - '.$message['key'],
+          'trace' => $message['trace'],
+          'time'  => $message['time'],
+          'result' => ($message['result'])  ? 'SUCCESS' : 'ERROR'
+        );
+      }
     return $queries;
   }
 
