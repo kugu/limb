@@ -16,7 +16,7 @@ lmb_require('limb/dbal/src/drivers/lmbAutoTransactionConnection.class.php');
  */
 class lmbAutoDbTransactionFilter
 {
-  function run($chain)
+/*  function run($chain)
   {
     $toolkit = lmbToolkit :: instance();
     $old_conn = $toolkit->getDefaultDbConnection();
@@ -33,6 +33,23 @@ class lmbAutoDbTransactionFilter
     {
       $conn->rollbackTransaction();
       $toolkit->setDefaultDbConnection($old_conn);
+      throw $e;
+    }
+  }*/
+
+  function run($chain)
+  {
+    $toolkit = lmbToolkit :: instance();
+    $conn = $toolkit->getDefaultDbConnection();
+
+    try
+    {
+      $chain->next();
+      $conn->commitTransaction();
+    }
+    catch(Exception $e)
+    {
+      $conn->rollbackTransaction();
       throw $e;
     }
   }

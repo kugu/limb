@@ -20,7 +20,7 @@ lmbDecorator :: generate('lmbDbConnection', 'lmbDbConnectionDecorator');
  */
 class lmbAuditDbConnection extends lmbDbConnectionDecorator
 {
-  protected $stats = array();
+  static $stats = array();
   
   function execute($sql)
   {
@@ -29,7 +29,7 @@ class lmbAuditDbConnection extends lmbDbConnectionDecorator
     $start_time = microtime(true);
     $res = parent :: execute($sql);
     $info['time'] = round(microtime(true) - $start_time, 6);
-    $this->stats[] = $info;
+    self::$stats[] = $info;
     return $res;
   }
   
@@ -40,7 +40,7 @@ class lmbAuditDbConnection extends lmbDbConnectionDecorator
     $start_time = microtime(true);
     $res = parent :: executeStatement($stmt);
     $info['time'] = round(microtime(true) - $start_time, 6);
-    $this->stats[] = $info;
+    self::$stats[] = $info;
     return $res;
   }
   
@@ -58,7 +58,7 @@ class lmbAuditDbConnection extends lmbDbConnectionDecorator
   
   function resetStats()
   {
-    $this->stats = array();
+    self::$stats = array();
   }
   
   function getQueries($reg_exp = '')
@@ -76,7 +76,7 @@ class lmbAuditDbConnection extends lmbDbConnectionDecorator
   
   function getTrace() 
   {
-  	$trace_length = 8;
+  	$trace_length = 10;
   	$offset = 4; // getting rid of useless trace elements
   	
   	$trace = new lmbBacktrace($trace_length, $offset);
@@ -85,7 +85,7 @@ class lmbAuditDbConnection extends lmbDbConnectionDecorator
   
   function getStats()
   {
-    return $this->stats; 
+    return self::$stats;
   }
   
   

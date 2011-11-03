@@ -17,8 +17,12 @@ class lmbProfileReportingFilter implements lmbInterceptingFilter
     if($is_profile_enabled)
     {
       $toolkit = lmbToolkit :: instance();
-      $conn = new lmbAuditDbConnection($toolkit->getDefaultDbConnection());
-      $toolkit->setDefaultDbConnection($conn);
+      $conn = $toolkit->getDefaultDbConnection();
+      if (!$conn instanceof lmbAuditDbConnection)
+      {
+        $conn = new lmbAuditDbConnection($conn);
+        $toolkit->setDefaultDbConnection($conn);
+      }
       $this->start_time = microtime(true);
 
       $cache = $toolkit->getCache();
@@ -44,7 +48,7 @@ class lmbProfileReportingFilter implements lmbInterceptingFilter
       foreach ($cache->getRuntimeStats() as $key => $info)
         $reporter->addCacheQuery($info);
 
-     lmbToolkit::instance()->getResponse()->append($reporter->getReport());
+      lmbToolkit::instance()->getResponse()->append($reporter->getReport());
     }
   }
 }
