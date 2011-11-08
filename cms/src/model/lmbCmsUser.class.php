@@ -68,6 +68,13 @@ class lmbCmsUser extends lmbActiveRecord
   {
     if($this->password)
       $this->setHashedPassword($this->getCryptedPassword($this->password));
+
+    if (!$this->user_id)
+    {
+      $user = new User();
+      $user->save();
+      $this->user_id = $user->id;
+    }
   }
 
   function login($login, $password)
