@@ -18,6 +18,13 @@ lmb_require("limb/cms/src/model/lmbCmsUserRoles.class.php");
 
 class lmbCmsUser extends lmbActiveRecord
 {
+  protected $_many_belongs_to = array(
+    'user' => array(
+      'field' => 'user_id',
+      'class' => 'User',
+    )
+  );
+
   protected $password;
   protected $_is_logged_in = false;
 
