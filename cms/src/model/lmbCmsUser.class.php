@@ -72,6 +72,7 @@ class lmbCmsUser extends lmbActiveRecord
     if (!$this->user_id)
     {
       $user = new User();
+      $user->import($this->export());
       $user->save();
       $this->user_id = $user->id;
     }
