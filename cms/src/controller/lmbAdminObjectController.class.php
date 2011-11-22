@@ -213,7 +213,7 @@ abstract class lmbAdminObjectController extends lmbObjectController
     $priority_items = $this->request->get('priority_items');
 
     $info_item = new $model();
-    $sql = 'SELECT id, priority FROM ' . $info_item->getTableName() . ' WHERE ' . $where_field . '=' . $where_field_value;
+    $sql = 'SELECT id, priority FROM ' . $info_item->getTableName() . ' WHERE ' . $where_field . '="' . lmbDBAL::defaultConnection()->escape($where_field_value) . '"';
     $current_priorities_object = lmbDBAL :: fetch($sql);
     $current_priorities_object = $current_priorities_object->getArray();
 
